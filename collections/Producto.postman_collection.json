@@ -1,0 +1,823 @@
+{
+	"info": {
+		"_postman_id": "62916e0f-c2e8-4379-8b65-4d069882085b",
+		"name": "Producto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24048087"
+	},
+	"item": [
+		{
+			"name": "Crear un producto válido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var responseData = pm.response.json();\r",
+							"pm.globals.set(\"productoId\", responseData.productoId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Producto 6\",\r\n  \"precio\": 100.0,\r\n  \"tipo\": \"No perecedero\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/products",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un producto válido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Producto 1\",\r\n  \"precio\": 100.0,\r\n  \"tipo\": \"Perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "108"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6c-XLvYvTDvb9asjFtaWBEIC+PtnpU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:48:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Producto 1\",\n    \"precio\": 100,\n    \"tipo\": \"Perecedero\",\n    \"productoId\": \"c834a9fc-40e7-4118-9b69-0d99d0d90def\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un producto inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400 or 422\", function () {\r",
+							"    pm.response.to.have.status.oneOf([400, 422]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"\",\r\n  \"precio\": -100,\r\n  \"tipo\": \"Invalido\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/products",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un producto inválido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"\",\r\n  \"precio\": -100,\r\n  \"tipo\": \"Invalido\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"51-i61jApLzWb1TLgwNH3ZRI2VwEAQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:52:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": [\n        \"nombre should not be empty\"\n    ],\n    \"error\": \"Bad Request\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los productos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/products",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los productos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "466"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d2-ZZLXZPGplp9DGhlqKZgWsYRcObQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:55:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"productoId\": \"c1b8e4e8-7e5f-4f8f-b461-6879e91f4d4d\",\n        \"nombre\": \"Producto 4\",\n        \"precio\": \"100.00\",\n        \"tipo\": \"No perecedero\"\n    },\n    {\n        \"productoId\": \"4e326927-5c8f-4adb-9393-f46a488ded6c\",\n        \"nombre\": \"Producto 5\",\n        \"precio\": \"100.00\",\n        \"tipo\": \"No perecedero\"\n    },\n    {\n        \"productoId\": \"b853ae01-a9ee-4dcf-9d4e-2a65f50c9bfe\",\n        \"nombre\": \"Producto 6\",\n        \"precio\": \"100.00\",\n        \"tipo\": \"No perecedero\"\n    },\n    {\n        \"productoId\": \"eb7feb39-17f3-41b4-a14e-08d2c9035b21\",\n        \"nombre\": \"Producto 7\",\n        \"precio\": \"100.00\",\n        \"tipo\": \"Perecedero\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener un producto por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b21",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products",
+						"eb7feb39-17f3-41b4-a14e-08d2c9035b21"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b21",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"eb7feb39-17f3-41b4-a14e-08d2c9035b21"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "113"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"71-NG/nr9Da0mAZ/zNnq/eSS3qQ9ZM\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:56:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"productoId\": \"eb7feb39-17f3-41b4-a14e-08d2c9035b21\",\n    \"nombre\": \"Producto 7\",\n    \"precio\": \"100.00\",\n    \"tipo\": \"Perecedero\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un producto por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b22",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products",
+						"eb7feb39-17f3-41b4-a14e-08d2c9035b22"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por un ID que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b22",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"eb7feb39-17f3-41b4-a14e-08d2c9035b22"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4b-x/NpNlIgn4/MEWgprl4FJ5GCKbs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:57:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El producto con el ID dado no fue encontrado\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Producto Actualizado\",\r\n  \"precio\": 150.0,\r\n  \"tipo\": \"No perecedero\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b21",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products",
+						"eb7feb39-17f3-41b4-a14e-08d2c9035b21"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un producto",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Producto Actualizado\",\r\n  \"precio\": 150.0,\r\n  \"tipo\": \"No perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b21",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"eb7feb39-17f3-41b4-a14e-08d2c9035b21"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "126"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7e-i95DErwuPtf2x7ZXvjezJIDsaow\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:58:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"productoId\": \"eb7feb39-17f3-41b4-a14e-08d2c9035b21\",\n    \"nombre\": \"Producto Actualizado\",\n    \"precio\": \"150.00\",\n    \"tipo\": \"No perecedero\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un producto con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Producto Actualizado\",\r\n  \"precio\": 150.0,\r\n  \"tipo\": \"No perecedero\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b22",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products",
+						"eb7feb39-17f3-41b4-a14e-08d2c9035b22"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un producto con un ID que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Producto Actualizado\",\r\n  \"precio\": 150.0,\r\n  \"tipo\": \"No perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b22",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"eb7feb39-17f3-41b4-a14e-08d2c9035b22"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4b-x/NpNlIgn4/MEWgprl4FJ5GCKbs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:58:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El producto con el ID dado no fue encontrado\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un producto por su ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b21",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products",
+						"eb7feb39-17f3-41b4-a14e-08d2c9035b21"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un producto por su ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b21",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"eb7feb39-17f3-41b4-a14e-08d2c9035b21"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 19:59:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar un producto con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b22",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"products",
+						"eb7feb39-17f3-41b4-a14e-08d2c9035b22"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un producto con un ID que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/eb7feb39-17f3-41b4-a14e-08d2c9035b22",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"eb7feb39-17f3-41b4-a14e-08d2c9035b22"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4b-x/NpNlIgn4/MEWgprl4FJ5GCKbs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Nov 2023 20:00:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El producto con el ID dado no fue encontrado\"\n}"
+				}
+			]
+		}
+	]
+}
